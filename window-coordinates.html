@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinates</title>
+  <style>
+    body {
+      background-color: black;
+      /* overflow: hidden; */
+      /* 문서 스크롤 잠금 */
+    }
+    div {
+      background-color:blanchedalmond;
+      width: 250px;
+      height: 250px;
+      margin-bottom: 4px;
+      border-radius: 4px;
+    }
+    .special{
+      background-color: lightsalmon;
+    }
+    aside{
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="special"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <aside>
+    <button id="by" >Scroll by 100px(y)</button>
+    <button id="to">Scroll to 100px(y)</button>
+    <button id="toSpecial">Scroll into special</button>
+  </aside>
+  <script>
+    const special=document.querySelector('.special');
+    const bBy = document.querySelector('#by');
+    const bTo = document.querySelector('#to');
+    const bToSpecial = document.querySelector('#toSpecial');
+    special.addEventListener('click', (event)=>{
+      const rect = special.getBoundingClientRect();
+      console.log(rect)
+      console.log(`page : ${event.pageX},${event.pageY}`);
+      console.log(`client ${event.clientX}, ${event.clientY}`)
+    });
+    bBy.addEventListener('click',(event)=>{
+      window.scrollBy({ top: 100, left: 0, behavior: "smooth"});
+    })
+    bTo.addEventListener('click',(event)=>{
+      window.scrollTo(0,100);
+    })
+    bToSpecial.addEventListener('click',(event)=>{
+      special.scrollIntoView();
+    })
+  </script>
+</body>
+</html>
