@@ -3,7 +3,12 @@ import * as sound from './sound.js';
 
 const CARROT_SIZE=80;
 
-export default class Field{
+export const ItemType = Object.freeze({
+  carrot : 'carrot',
+  bug : 'bug',
+})
+
+export class Field{
 
   constructor(carrotCount, bugCount){
     this.carrotCount = carrotCount;
@@ -25,23 +30,20 @@ export default class Field{
   }
 
   onClick = (event) => {
-    console.log('click');
-    console.log(this.onItemClick);
     const target = event.target;
     if(target.matches('.carrot')){
       //.matches는 CSS 셀렉터가 맞으면 true
       target.remove();
       sound.playCarrot();
-      this.onItemClick && this.onItemClick('carrot');
+      this.onItemClick && this.onItemClick(ItemType.carrot);
     }
     else if(target.matches('.bug')){
-      this.onItemClick && this.onItemClick('bug');
+      this.onItemClick && this.onItemClick(ItemType.bug);
     }
   }
 
   setClickListener(onItemClick){
     this.onItemClick = onItemClick;
-    console.log(this.onItemClick);
   }
 
   _addItem(className,count,imgPath){
